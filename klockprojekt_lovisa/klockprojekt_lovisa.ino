@@ -1,14 +1,16 @@
+//inkludera olika libraries
 #include <RTClib.h>
 #include <Wire.h>
 #include <U8glib.h>
 
 // Init constants
 const int potPin = A1;
+
+// Init global variables
+//RGB-dioden
 int redPin = 13;
 int greenPin = 12;
 int bluePin = 11;
-
-// Init global variables
 
 // construct objects
 RTC_DS3231 rtc;
@@ -16,11 +18,14 @@ U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NO_ACK);
 
 
 void setup() {
+  // Deklarerar outputs och inputs
   pinMode(potPin, INPUT);
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
+  //seriellmonitorn
   Serial.begin(9600);
+  
   // Init Hardware
   Wire.begin();
   rtc.begin();
@@ -90,10 +95,19 @@ float getTemp(){
   return rtc.getTemperature();
 }
 
+/*
+*This function reads the potentiometer and sets the span of 0-1023 to 15-30
+*Parameter:
+*Returns: threshhold for temperature*/
+
 int getThresh() {
   return map(analogRead(potPin), 0, 1023, 15, 30);
   }
 
+/*
+*This function sets the RGB values for the RGB diode
+*Parameter:
+*/
 void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
  {
   analogWrite(redPin, red_light_value);
