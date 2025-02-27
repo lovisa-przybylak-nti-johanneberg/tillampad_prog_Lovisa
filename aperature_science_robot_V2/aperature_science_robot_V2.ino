@@ -44,7 +44,7 @@ void setup() {
     Serial.println(F("1.Please recheck the connection!"));
     Serial.println(F("2.Please insert the SD card!"));
   }
-  mp3Player.volume(10);  // Set volume for mp3 Player
+  mp3Player.volume(20);  // Set volume for mp3 Player
 
   if (!lox.begin()) {
     Serial.println("Laser no workie");
